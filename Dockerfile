@@ -5,7 +5,7 @@ FROM postman/newman:alpine
 RUN apk add --no-cache git
 
 # Clone the Postman collection from your GitLab repo (replace with your repo URL)
-RUN git clone https://github.com/mmba007/test-argo-newman
+RUN git clone --branch main https://github.com/mmba007/test-argo-newman /usr/src/app
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -14,4 +14,3 @@ WORKDIR /usr/src/app
 # Here, we run Newman with the collection and environment files from the Git repo
 ENTRYPOINT ["newman", "run"]
 CMD ["fake-collection.json", "--environment", "env.json", "--reporters", "cli"]
-# CMD newman run fake-collection.json --environment env.json --reporters cli
